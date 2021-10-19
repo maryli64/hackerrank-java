@@ -1,12 +1,12 @@
-package main;
-
-import java.io.*;
-import java.util.stream.IntStream;
-
 /**
  * Author: Mary L
  * Link: https://www.hackerrank.com/challenges/repeated-string/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup
  */
+
+package main;
+
+import java.io.*;
+
 public class RepeatedStr {
 
     /*
