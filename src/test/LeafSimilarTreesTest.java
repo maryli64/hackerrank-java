@@ -1,5 +1,7 @@
-package main;
+package test;
 
+import main.LeafSimilarTrees;
+import main.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
 

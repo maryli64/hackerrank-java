@@ -1,5 +1,6 @@
-package main;
+package test;
 
+import main.LemonadeChange;
 import org.junit.Assert;
 import org.junit.Test;
 

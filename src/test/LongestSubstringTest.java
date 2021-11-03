@@ -1,6 +1,7 @@
-package main;
+package test;
 
 
+import main.LongestSubstring;
 import org.junit.Assert;
 import org.junit.Test;
 
