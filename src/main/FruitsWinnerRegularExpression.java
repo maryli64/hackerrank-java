@@ -4,10 +4,13 @@
 package main;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-public class FruitsWinner {
+public class FruitsWinnerRegularExpression {
 
     /*
      *Complete the 'foo' function below.
@@ -27,30 +30,40 @@ public class FruitsWinner {
         if (shoppingCart == null || shoppingCart.isEmpty()) {
             return 0;
         }
-        String currentCodeArrStr = codeList.get(currentCodeListInd);
-        String[] currentCodeArr = currentCodeArrStr.split(" ");
-        int matchIndex = 0;
-        int lastMatchIndex=0;
-        for (int i=0; i<shoppingCart.size();i++) {
-        //while(lastMatchIndex<shoppingCart.size()){
-            if (currentCodeArr[matchIndex].equalsIgnoreCase("anything") || currentCodeArr[matchIndex].equalsIgnoreCase(shoppingCart.get(i))) {
-                if (matchIndex >= currentCodeArr.length - 1) {
-                    matchIndex = 0;
-                    currentCodeListInd++;
-                    if (currentCodeListInd >= codeList.size()) {
-                        return 1;
-                    }
-                    currentCodeArrStr = codeList.get(currentCodeListInd);
-                    currentCodeArr = currentCodeArrStr.split(" ");
-                } else {
-                    matchIndex++;
-                }
-            } else if (matchIndex > 0) {
-                matchIndex = 0;
-                lastMatchIndex++;
+
+      String shoppingCartStr=  shoppingCart.stream().collect(Collectors.joining(","));
+        StringBuilder sb= new StringBuilder();
+        sb.append("\\b");
+
+        for(int i = 0; i<codeList.size(); i++){
+            String[] codeArr = codeList.get(i).split(" ");
+            if(i>0){
+                sb.append("(.*)");
             }
+            for(int j=0; j<codeArr.length; j++){
+                if(j>0){
+                    sb.append("[,]");
+                }
+                if(codeArr[j].equalsIgnoreCase("anything")){
+                    sb.append("(\\w+)");
+                }else {
+                    sb.append("(").append(codeArr[j]).append(")");
+                }
+            }
+
         }
-        return 0;
+        sb.append("\\b");
+        String match=sb.toString();
+        Pattern pattern = Pattern.compile(sb.toString(), Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(shoppingCartStr);
+        boolean matchFound = matcher.find();
+        if(matchFound) {
+            System.out.println("Match found");
+            return 1;
+        } else {
+            System.out.println("Match not found");
+            return 0;
+        }
     }
 
     public static void main(String[] args) throws IOException {
