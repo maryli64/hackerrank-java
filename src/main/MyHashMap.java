@@ -11,9 +11,9 @@ public class MyHashMap {
      * Initialize your data structure here.
      */
     public MyHashMap() {
-        this.key_space = 2069;
+        this.key_space = 2068;
         this.hash_table = new ArrayList<Bucket>();
-        for (int i = 0; i < this.key_space; ++i) {
+        for (int i = 0; i < this.key_space; i++) {
             this.hash_table.add(new Bucket());
         }
     }
